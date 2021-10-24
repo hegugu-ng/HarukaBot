@@ -6,11 +6,7 @@ from tortoise.exceptions import ConfigurationError
 
 from ..utils import get_path
 
-# 这里假装从配置文件读过来关于数据库的设置
-setting = {
-    "connections": {},
-    "apps": {}
-}
+from .setting import setting
 
 # hb的基本数据库名称为 default,且此名称不能被用户使用
 if 'default' in setting['connections'].keys():

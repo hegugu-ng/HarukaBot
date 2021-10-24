@@ -23,7 +23,6 @@ from .models import Version as DBVersion
 uid_list = {'live': {'list': [], 'index': 0},
             'dynamic': {'list': [], 'index': 0}}
 
-
 class DBBase:
     """数据库管理基类"""
     _instance_lock = threading.Lock()
