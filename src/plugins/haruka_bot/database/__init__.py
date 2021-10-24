@@ -1,1 +1,1 @@
-from .db import DB
+from .crud import DB
