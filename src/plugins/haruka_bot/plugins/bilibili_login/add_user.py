@@ -48,7 +48,7 @@ async def got_loginname(bot: Bot, event: MessageEvent, state: T_State):
     if data:
         b = BiliReq()
         await add_user_password.send(f"用户【{data[0].name}】已经存在数据库中啦!\n不用再登录了哦！\n您可以输入【帮助】\n查看更多账号操作哦！")
-        userinfo = await b.login_info(data[0].access_token+"55")
+        userinfo = await b.login_info(data[0].access_token)
         if userinfo['code'] == -101:
             await add_user_password.send(f"用户【{data[0].name}】登录凭据已过期\n将为您尝试自动刷新")
             testcount = 3
