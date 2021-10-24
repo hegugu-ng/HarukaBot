@@ -1,5 +1,3 @@
-import json
-import re
 import time
 import base64
 import rsa
@@ -219,6 +217,14 @@ class BiliReq():
 
         url = "https://passport.bilibili.com/api/oauth2/revoke"
         return (await self.post(url, params = params))
+    
+    async def nav_info(self,ACCESS_TOKEN):
+        url = "http://api.bilibili.com/x/web-interface/nav/stat"
+        params = {
+            'access_key': ACCESS_TOKEN
+        }
+        res = await self.get(url, params = params)
+        return res
 
     # async def adduser_and_login(self, username, password):
     #     """

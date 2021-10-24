@@ -68,6 +68,7 @@ async def got_loginname(bot: Bot, event: MessageEvent, state: T_State):
                     userinfo = await b.login_info(logindata["access_token"])
                     async with DB() as db:
                         await db.update_loginuser(
+                            loginname=loginname,
                             name=userinfo['uname'],
                             uid=logindata["mid"],
                             DedeUserID=logindata["DedeUserID"],
