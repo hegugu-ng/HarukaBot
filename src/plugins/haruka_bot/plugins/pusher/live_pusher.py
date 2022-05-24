@@ -28,12 +28,11 @@ async def live_sched():
             continue
         old_status = status[uid]
         if new_status != old_status and new_status: # 判断是否推送过
-            room_id = info['short_id'] if info['short_id'] else info['room_id']
-            url = 'https://live.bilibili.com/' + str(room_id)
+            room_id = info['short_id'] or info['room_id']
+            url = f'https://live.bilibili.com/{str(room_id)}'
             name = info['uname']
             title = info['title']
-            cover = (info['cover_from_user'] if info['cover_from_user']
-                                             else info['keyframe'])
+            cover = info['cover_from_user'] or info['keyframe']
             logger.info(f"检测到开播：{name}（{uid}）")
 
             live_msg = (f"{name} 正在直播：\n{title}\n" + 

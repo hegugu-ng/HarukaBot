@@ -31,7 +31,7 @@ async def remove(bot: Bot, event: MessageEvent,
         await remove_user.stop_propagation()
     strtab = "|    UID     |      用户名      |"
     for user in users:
-        strtab = strtab + f"\n{user.uid}    {user.name}"
+        strtab = f"{strtab}\n{user.uid}    {user.name}"
     await remove_user.send(strtab)
 
 

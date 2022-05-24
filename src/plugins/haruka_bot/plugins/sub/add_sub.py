@@ -28,7 +28,7 @@ async def _(bot: Bot, event: MessageEvent, state: T_State):
         try:
             name = (await br.get_info(uid))['name']
         except RequestError as e:
-            if e.code == -400 or e.code == -404:
+            if e.code in [-400, -404]:
                 await add_sub.finish("UID不存在，注意UID不是房间号")
             elif e.code == -412:
                 await add_sub.finish("操作过于频繁IP暂时被风控，请半小时后再尝试")

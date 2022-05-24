@@ -55,9 +55,9 @@ class BiliReq():
                 logger.error(f"接收超时（{url}）")
                 raise
             except exception as e:
-                logger.error(f"未知错误（url）")
+                logger.error("未知错误（url）")
                 raise 
-            
+
             # if res['code'] != 0:
             #     raise RequestError(code=res['code'],
             #                         message=res['message'],
@@ -138,9 +138,8 @@ class BiliReq():
 
         if res['code'] != 0:
             return {"code":res['code'], "message":res['message']}
-        else:
-            res['data']['code'] = res['code']
-            return res['data']
+        res['data']['code'] = res['code']
+        return res['data']
     
     async def refresh_token(self, ACCESS_TOKEN, REFRESH_TOKEN):
         """
@@ -181,19 +180,16 @@ class BiliReq():
         res = await self.post(url, params = params)
         if res['code'] != 0:
             return {"code":res['code'], "message":res['message']}
-        else:
             # 这个返回的东西太多了，这里整理一下，新建一个 dict
-            data = {}
-            # 把状态码搬下来
-            data['code'] = res['code']
-            # 把 access_token 和 refresh_token 整出来
-            for key in res['data']['token_info']:
-                data[key] = res['data']['token_info'][key]
-            # 把 cookie 整理出来
-            for cookiesdict in res['data']['cookie_info']['cookies']:
-                data[cookiesdict['name']] = cookiesdict['value']
-                data['cookie_expires_in'] = cookiesdict['expires']
-            return data
+        data = {'code': res['code']}
+        # 把 access_token 和 refresh_token 整出来
+        for key in res['data']['token_info']:
+            data[key] = res['data']['token_info'][key]
+        # 把 cookie 整理出来
+        for cookiesdict in res['data']['cookie_info']['cookies']:
+            data[cookiesdict['name']] = cookiesdict['value']
+            data['cookie_expires_in'] = cookiesdict['expires']
+        return data
     
     async def _logout(self, ACCESS_TOKEN):
         """
@@ -291,12 +287,10 @@ class BiliReq():
         res = await self.get(url, params = params)
         if res['code'] != 0:
             return {"code":res['code'], "message":res['message']}
-        else:
-            data = {}
-            data['code'] = res['code']
-            for key in res['data']:
-                data[key] = res['data'][key]
-            return data
+        data = {'code': res['code']}
+        for key in res['data']:
+            data[key] = res['data'][key]
+        return data
 
     async def getflowing(self,cookie):
         """
@@ -307,7 +301,7 @@ class BiliReq():
             'uid':uid,
         }
         params['sign'] = await self._get_sign(params)
-        url = f"https://api.vc.bilibili.com/feed/v1/feed/get_attention_list"
+        url = "https://api.vc.bilibili.com/feed/v1/feed/get_attention_list"
 
         res = await self.get(url, params = params)
 

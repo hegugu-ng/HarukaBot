@@ -69,16 +69,20 @@ async def safe_send(bot_id, send_type, type_id, message, at=False):
     except KeyError:
         logger.error(f"推送失败，Bot（{bot_id}）未连接")
         return
-    
+
     if at and (await bot.get_group_at_all_remain(group_id=type_id)
                )['can_at_all']:
         message = MessageSegment.at('all') + message
 
     try:
-        return await bot.call_api('send_'+send_type+'_msg', **{
-        'message': message,
-        'user_id' if send_type == 'private' else 'group_id': type_id
-        })
+        return await bot.call_api(
+            f'send_{send_type}_msg',
+            **{
+                'message': message,
+                'user_id' if send_type == 'private' else 'group_id': type_id,
+            },
+        )
+
     except ActionFailed as e:
         url = "https://haruka-bot.sk415.icu/usage/faq.html#机器人不发消息也没反应"
         logger.error(f"推送失败，账号可能被风控（{url}），错误信息：{e.info}")

@@ -100,7 +100,7 @@ class DB:
         if len(users) == 0 or users is None:
             return None
 
-        tokenlist = [
+        return [
             {
                 "DedeUserID": str(user.DedeUserID),
                 "DedeUserID__ckMd5": user.DedeUserID__ckMd5,
@@ -108,7 +108,7 @@ class DB:
                 "bili_jct": user.bili_jct,
                 "sid": user.sid,
                 "access_token": user.access_token,
-                "refresh_token": user.refresh_token
-            } for user in users
+                "refresh_token": user.refresh_token,
+            }
+            for user in users
         ]
-        return tokenlist

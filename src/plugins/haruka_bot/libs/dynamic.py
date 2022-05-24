@@ -9,7 +9,7 @@ class Dynamic():
         # self.dynamic['card'] = self.card
         self.type = dynamic['desc']['type']
         self.id = dynamic['desc']['dynamic_id']
-        self.url = "https://t.bilibili.com/" + str(self.id)
+        self.url = f"https://t.bilibili.com/{str(self.id)}"
         self.time = dynamic['desc']['timestamp']
         # self.origin_id = dynamic['desc']['orig_dy_id']
         self.uid = dynamic['desc']['user_profile']['info']['uid']
