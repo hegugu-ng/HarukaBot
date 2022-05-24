@@ -50,9 +50,9 @@ class BiliReq():
                 logger.error(f"接收超时（{url}）")
                 raise
             except exception as e:
-                logger.error(f"未知错误（url）")
+                logger.error("未知错误（url）")
                 raise 
-            
+
             if res['code'] != 0:
                 raise RequestError(code=res['code'],
                                     message=res['message'],
@@ -73,11 +73,6 @@ class BiliReq():
         # need_top: {1: 带置顶, 0: 不带置顶}
         url = f'https://api.vc.bilibili.com/dynamic_svr/v1/dynamic_svr/space_history?host_uid={uid}&offset_dynamic_id=0&need_top=0'
         return await self.get(url, headers=self.default_headers)
-    
-    # async def get_new_dynamics(self):
-    #     url = 'https://api.vc.bilibili.com/dynamic_svr/v1/dynamic_svr/dynamic_new'
-    #     params = {'type_list': 268435455, 'access_key': self.login['access_token']}
-        return await self.get(url, params=params)
 
     # async def get_history_dynamics(self, offset_id):
     #     url = 'https://api.vc.bilibili.com/dynamic_svr/v1/dynamic_svr/dynamic_history'

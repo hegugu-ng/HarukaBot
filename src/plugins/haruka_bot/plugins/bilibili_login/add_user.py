@@ -108,7 +108,7 @@ async def got_pass(bot: Bot, event: MessageEvent, state: T_State):
     async with DB() as db:
         data = await db._get_user(uid=logindata["mid"])
     if data:
-        await add_user_password.send(f"找到相同用户，将会进行覆盖。")
+        await add_user_password.send("找到相同用户，将会进行覆盖。")
         await db.update_loginuser(
             loginname=loginname,
             password=password,
@@ -147,13 +147,13 @@ def secs2day(insecs: int) -> str:
     timestr = ''
     if insecs >= day:
         days, insecs = divmod(insecs, day)
-        timestr = timestr + f'{days}天'
+        timestr += f'{days}天'
     if insecs >= hour:
         hours, insecs = divmod(insecs, hour)
-        timestr = timestr + f'{hours}小时'
+        timestr = f'{timestr}{hours}小时'
     if insecs >= min:
         mins, insecs = divmod(insecs, min)
-        timestr = timestr + f'{mins}分钟'
+        timestr += f'{mins}分钟'
     if insecs > 0:
-        timestr = timestr + f'{insecs}秒'
+        timestr += f'{insecs}秒'
     return timestr

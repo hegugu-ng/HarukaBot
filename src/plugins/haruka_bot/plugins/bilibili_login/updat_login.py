@@ -35,9 +35,10 @@ async def exp(bot: Bot, event: MessageEvent,
         nav = await b.nav_info(user.access_token)
         userinfo = await b.login_info(user.access_token)
         if userinfo["code"] == -101:
-            strtab = strtab + f"\n{user.uid} {user.name} 未登录，请刷新登录"
+            strtab = f"{strtab}\n{user.uid} {user.name} 未登录，请刷新登录"
         else:
-            strtab = strtab + f"\n{user.uid} {user.name} {secs2day(userinfo['expires_in'])}  {nav['data']['following']}关注"
+            strtab = f"{strtab}\n{user.uid} {user.name} {secs2day(userinfo['expires_in'])}  {nav['data']['following']}关注"
+
     await exp_user.send(strtab)
 
 # 使用密码登录账号
@@ -61,9 +62,9 @@ async def updat(bot: Bot, event: MessageEvent,
     for user in users:
         userinfo = await b.login_info(user.access_token)
         if userinfo["code"] == -101:
-            strtab = strtab + f"\n{user.uid} {user.name} 未登录，请刷新登录"
+            strtab = f"{strtab}\n{user.uid} {user.name} 未登录，请刷新登录"
         else:
-            strtab = strtab + f"\n{user.uid} {user.name} {secs2day(userinfo['expires_in'])}"    
+            strtab = f"{strtab}\n{user.uid} {user.name} {secs2day(userinfo['expires_in'])}"
     await up_user.send(strtab)
 
 
